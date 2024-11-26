@@ -19,7 +19,7 @@
 */
 
 /* _____________ ここにコードを記入 _____________ */
-
-type TupleToObject<T extends readonly (symbol | number | string)[]> = {
+// symbol が穴だった
+type TupleToObject<T extends readonly (symbol | number | string)[]> = { 
     [Key in T[number]]: Key
   }
