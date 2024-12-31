@@ -38,6 +38,7 @@ type MyReadonly2<T, K extends keyof T = keyof T> =
 {
   readonly [Key in keyof T as Key extends K ? Key : never]: T[Key]
 } & {
+    // メモ： ブラケット記法は一つの Interface 内に共存出来ないので、別の Interface に分ける
     [Key in keyof T as Key extends K ? never : Key]: T[Key]
   }
 type Hoge = MyReadonly2<Todo1>
