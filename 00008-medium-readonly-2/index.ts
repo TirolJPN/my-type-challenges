@@ -41,6 +41,9 @@ type MyReadonly2<T, K extends keyof T = keyof T> =
     // メモ： ブラケット記法は一つの Interface 内に共存出来ないので、別の Interface に分ける
     [Key in keyof T as Key extends K ? never : Key]: T[Key]
   }
+// 下記でも行ける
+// type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> &
+//   Readonly<Pick<T, K>>;
 type Hoge = MyReadonly2<Todo1>
 
 /* _____________ テストケース _____________ */
