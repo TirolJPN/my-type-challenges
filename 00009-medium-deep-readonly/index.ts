@@ -36,9 +36,17 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
+// NOTE: object と Object と {} は違う
+// https://typescriptbook.jp/reference/values-types-variables/object/difference-among-object-and-object#object%E5%9E%8B
 type DeepReadonly<T> = {
     readonly [Key in keyof T]: T[Key] extends number | string | boolean | symbol | Function ? T[Key] : DeepReadonly<T[Key]>
   }
+
+// 超エレガント、keyof T extends never で、T がオブジェクトではない場合に再帰を終了させている
+// https://github.com/type-challenges/type-challenges/issues/187
+// type DeepReadonly<T> = keyof T extends never
+//   ? T
+//   : { readonly [k in keyof T]: DeepReadonly<T[k]> };
   
   /* _____________ テストケース _____________ */
   import type { Equal, Expect } from '@type-challenges/utils'
