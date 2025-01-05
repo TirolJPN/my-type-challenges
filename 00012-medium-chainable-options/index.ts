@@ -48,6 +48,13 @@ type Chainable<R = object> = {
     ): Chainable<Omit<R, K> & Record<K, V>>
     get(): R
   }
+
+  type Chainable2<T = {}> = {
+    option: <K extends string, V>(key: K extends keyof T ?
+      V extends T[K] ? never : K
+      : K, value: V) => Chainable<Omit<T, K> & Record<K, V>>
+    get: () => T
+  }
   
   /* _____________ テストケース _____________ */
   import type { Alike, Expect } from '@type-challenges/utils'
